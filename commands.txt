@@ -6,4 +6,5 @@ npm install express
 npm i dotenv
 
 "type": "module",
-
+npm i axious
+npm i cors
