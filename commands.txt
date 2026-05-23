@@ -3,3 +3,4 @@ npm init -y
 node index.js
 npm run start, "start": "node index.js",
 npm install express
+npm i dotenv
