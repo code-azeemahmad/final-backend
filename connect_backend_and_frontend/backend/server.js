@@ -13,7 +13,6 @@ app.get("/server", (req, res) => {
 
 // get a list of 5 jokes
 app.get("/api/jokes", (req, res) => {
-  // standard practice
   const jokes = [
     {
       id: 1,
@@ -49,3 +48,5 @@ app.listen(port, () => {
 });
 
 // module js works asynchronously
+// concept of proxies
+// bad practice npm run build, push the dist folder from frontend to backend
