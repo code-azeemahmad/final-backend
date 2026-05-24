@@ -14,3 +14,5 @@ npm i -D nodemon
 
 mkdir app.js contants.js index.js
 mkdir controllers db middlewares models routes utils 
+
+npm i -D prettier
