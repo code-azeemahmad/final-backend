@@ -4,11 +4,16 @@ import express from 'express';
 const port = process.env.PORT || 3000;
 const app = express();
 
-connectDB();
-
-app.listen(port, () => {
-    console.log(`Server running on port ${port}`);
+connectDB()
+.then(() => {
+    app.listen(port, () => {
+        console.log(`Server is listening at ${port}`);
+    });
+})
+.catch((error) => {
+    console.log("DB Connection Error:", error);
 });
+
 
 
 
