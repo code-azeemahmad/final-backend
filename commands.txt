@@ -21,3 +21,5 @@ npm i cookie-parser
 npm i cors
 
 npm i mongoose-aggregate-paginate-v2    // helps you to write aggregation queries
+npm i bcrypt    // hash your passwords
+npm i jsonwebtoken
