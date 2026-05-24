@@ -23,3 +23,6 @@ npm i cors
 npm i mongoose-aggregate-paginate-v2    // helps you to write aggregation queries
 npm i bcrypt    // hash your passwords
 npm i jsonwebtoken
+
+// generate secrets directly in terminal:
+node -e "console.log(require('crypto').randomBytes(64).toString('hex'))"
