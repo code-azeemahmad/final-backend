@@ -10,3 +10,7 @@ npm i axious
 npm i cors
 .gitignore generator for node
 npm i -D nodemon
+
+
+mkdir app.js contants.js index.js
+mkdir controllers db middlewares models routes utils 
