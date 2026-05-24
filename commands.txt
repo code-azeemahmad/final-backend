@@ -8,3 +8,5 @@ npm i dotenv
 "type": "module",
 npm i axious
 npm i cors
+.gitignore generator for node
+npm i -D nodemon
