@@ -16,3 +16,4 @@ mkdir app.js contants.js index.js
 mkdir controllers db middle wares models routes utils 
 
 npm i -D prettier
+npm i mongoose
