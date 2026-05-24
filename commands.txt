@@ -19,3 +19,5 @@ npm i -D prettier
 npm i mongoose
 npm i cookie-parser
 npm i cors
+
+npm i mongoose-aggregate-paginate-v2    // helps you to write aggregation queries
