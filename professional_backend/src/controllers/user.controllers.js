@@ -17,6 +17,7 @@ const generateAccessAndRefreshTokens = async (userId) => {
 
     return { accessToken, refreshToken };
   } catch (error) {
+    // console.log("TOKEN ERROR:", error);
     throw new ApiError(
       500,
       "Something went wrong while generating access and refresh tokens"
@@ -105,7 +106,7 @@ const loginUser = asyncHandler(async (req, res) => {
 
   const { username, email, password } = req.body; // req.body contains: data sent by frontend/client
 
-  if (!username || !email)
+  if (!(username || email))
     throw new ApiError(400, "Username or Password is required!");
 
   // user is actual database document
@@ -123,7 +124,7 @@ const loginUser = asyncHandler(async (req, res) => {
     user._id
   );
 
-  const loggedInUser = User.findById(user._id).select(
+  const loggedInUser = await User.findById(user._id).select(
     "-password -refreshToken"
   );
 
@@ -168,8 +169,8 @@ const logoutUser = asyncHandler(async (req, res) => {
 
   return res
   .status(200)
-  .clearCookies("accessToken", options)
-  .clearCookies("refreshToken", options)
+  .clearCookie("accessToken", options)
+  .clearCookie("refreshToken", options)
   .json(new ApiResponse(
     200, {}, "User Logged out successfully",
   ));

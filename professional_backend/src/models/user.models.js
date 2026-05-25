@@ -52,7 +52,7 @@ const userSchema = new mongoose.Schema(
 // pre hook in mongoose: do some work on data just before saving (read doc)
 userSchema.pre("save", async function (next) {
   // cryptographic algorithm takes time
-  if (!this.isModified("password")) return next();
+  if (!this.isModified("password")) return next;
   // run this code only when password field is modified, not others
   this.password = await bcrypt.hash(this.password, 10);
   next;
