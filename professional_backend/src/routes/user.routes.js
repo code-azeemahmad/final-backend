@@ -1,9 +1,23 @@
 import { Router } from 'express';
-import {registerUser} from '../controllers/user.controllers.js';
+import { registerUser } from '../controllers/user.controllers.js';
+import { upload } from '../middlewares/multer.middleware.js';
 
 const router = Router();
 
-router.route('/register').post(registerUser);   // here control will be given to registerUser method
+router.route('/register').post(
+    // inject middlewares
+    upload.fields([
+        {
+            name: "avatar",
+            maxCount: 1,
+        },
+        {
+            name: "coverImage",
+            maxCount: 1,
+        }
+    ]),
+    registerUser
+);   // here control will be given to registerUser method
 
 
 export default router;  // default export
