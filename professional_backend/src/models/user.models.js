@@ -55,7 +55,7 @@ userSchema.pre("save", async function (next) {
   if (!this.isModified("password")) return next();
   // run this code only when password field is modified, not others
   this.password = await bcrypt.hash(this.password, 10);
-  next();
+  next;
 });
 // don't use arrow function, it does not know context(no this). Save event is taking place on User (refers to current User document)
 // 10 = salt rounds
