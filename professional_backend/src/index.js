@@ -1,8 +1,13 @@
 import 'dotenv/config';
 import connectDB from './db/index.js';
-import express from 'express';
 const port = process.env.PORT || 3000;
-const app = express();
+import {app} from './app.js';
+
+/*index.js(entry point) → imports app
+            ↓
+app.js(const app = express()) → defines routes
+            ↓
+router → defines endpoints*/
 
 connectDB()
 .then(() => {

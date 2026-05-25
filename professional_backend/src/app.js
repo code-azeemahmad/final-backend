@@ -27,7 +27,19 @@ app.use(express.static("public"));  // Serves static files from public folder.
 
 app.use(cookieParser());
 
+// routes import
+import userRouter from './routes/user.routes.js';
+
+// we were writing app.get() because we were writing routes and controllers using app.get() but now things are separate, router is in another file. So, in order to bring router, we will use a middleware. Use app.use(). this is syntax
+
+// routes declaration
+app.use('/user', userRouter);   // control will be given to router in user.routes.js
+// http://localhost:3000/user/register
+
+// app.use('/api/v1/user', userRouter);
+// http://localhost:3000/api/v1/user/register
+
+
+
 export {app};
 
-// express request object and response object
-// req.params and req.body
