@@ -225,6 +225,9 @@ const changeCurrentPassword = asyncHandler(async (req, res) => {
 
   // auth middleware -> req.user
   const user = await User.findById(req.user?._id);
+
+  if (!user) throw new ApiError(404, "User not found");
+
   const isPasswordCorrect = await user.isPasswordCorrect(oldPassword);
 
   if (!isPasswordCorrect) {
@@ -265,6 +268,8 @@ const updateAccountDetails = asyncHandler(async (req, res) => {
     },
     { new: true }
   ).select("-password");
+
+  if (!user) throw new ApiError(404, "User not found");
 
   return res
     .status(200)
