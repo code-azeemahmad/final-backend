@@ -219,8 +219,8 @@ const refreshAccessToken = asyncHandler(async (res, req) => {
   }
 });
 
-const changeCurrentPassword = asyncHandler( async (req, res) => {
-  const {oldPassword, newPassword} = req.body;
+const changeCurrentPassword = asyncHandler(async (req, res) => {
+  const { oldPassword, newPassword } = req.body;
 
   // auth middleware -> req.user
   const user = await User.findById(req.user?._id);
@@ -231,30 +231,52 @@ const changeCurrentPassword = asyncHandler( async (req, res) => {
   }
 
   user.password = newPassword;
-  await user.save({validateBeforeSave: false});
+  await user.save();
 
   return res
-  .status(200)
-  .json(
-    new ApiResponse(200, {}, "Password changed successfully!"),
-  );
+    .status(200)
+    .json(new ApiResponse(200, {}, "Password changed successfully!"));
 });
 
-const getCurrentUser = asyncHandler( async (req, res) => {
+const getCurrentUser = asyncHandler(async (req, res) => {
   return res
-  .status(200)
-  .json(
-    new ApiResponse(
-      200, req.user, "Current user is fetched successfullly",
-    ),
-  );
+    .status(200)
+    .json(
+      new ApiResponse(200, req.user, "Current user is fetched successfullly")
+    );
 });
 
-export { 
-  registerUser, 
-  loginUser, 
-  logoutUser, 
-  refreshAccessToken, 
-  changeCurrentPassword, 
+// make separate end points for user files updation to avoid network congestion
+const updateAccountDetails = asyncHandler(async (req, res) => {
+  const { fullname, email } = req.body;
+
+  if (!fullname || !email) {
+    throw new ApiError(400, "All fields are required!");
+  }
+
+  const user = await User.findByIdAndUpdate(
+    req.user?._id,
+    {
+      $set: {
+        fullname,
+        email: email, // inconsistency to make you know that you can also write in this way
+      },
+    },
+    { new: true }
+  ).select("-password");
+
+  return res
+    .status(200)
+    .json(new ApiResponse(200, user, "Account details updated successfully"));
+});
+
+
+export {
+  registerUser,
+  loginUser,
+  logoutUser,
+  refreshAccessToken,
+  changeCurrentPassword,
   getCurrentUser,
+  updateAccountDetails,
 };
